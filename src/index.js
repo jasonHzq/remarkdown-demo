@@ -7,6 +7,10 @@ function getClasses(obj) {
   return classNames.filter(cls => obj[cls]).join(' ');
 }
 
+function code2md(code) {
+  return `\`\`\`\n${code}\n\`\`\``;
+}
+
 const OPTIONS = [{
   text: 'Demo',
   value: 'demo',
@@ -70,6 +74,7 @@ export default class Tab extends React.Component {
       'doc-demo-head-item': true,
       active: activeKey === 'code',
     });
+    const md = code2md(demo.codeSelf || '');
 
     return (
       <div className="doc-demo">
@@ -77,7 +82,7 @@ export default class Tab extends React.Component {
           {tabHeaders}
         </div>
         <div className="doc-code" style={this.getStyle('code')}>
-          <Remarkdown code={demo.selfCode || ''} />
+          <Remarkdown md={md} />
         </div>
         <div className="doc-true-demo" style={this.getStyle('demo')}>
         {createElement(demo, {})}
