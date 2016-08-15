@@ -1,5 +1,5 @@
 import React, { createElement } from 'react';
-import remarkdown from 'remarkdown';
+import Remarkdown from 'remarkdown';
 
 function getClasses(obj) {
   const classNames = Object.keys(obj);
