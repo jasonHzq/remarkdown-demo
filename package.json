@@ -1,6 +1,6 @@
 {
   "name": "remarkdown-doc",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -22,12 +22,7 @@
     "lib",
     "*.md"
   ],
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0"
-  },
   "author": "jasonHzq",
   "license": "ISC",
-  "dependencies": {
-    "remarkdown": "^0.2.0"
-  }
+  "dependencies": {}
 }

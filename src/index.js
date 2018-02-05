@@ -1,40 +1,43 @@
-import React, { createElement } from 'react';
-import Remarkdown from 'remarkdown';
+import React, { createElement } from "react";
+import Remarkdown from "remarkdown-loader/lib/Remarkdown";
 
 function getClasses(obj) {
   const classNames = Object.keys(obj);
 
-  return classNames.filter(cls => obj[cls]).join(' ');
+  return classNames.filter(cls => obj[cls]).join(" ");
 }
 
 function code2md(code) {
   return `\`\`\`\n${code}\n\`\`\``;
 }
 
-const OPTIONS = [{
-  text: 'Demo',
-  value: 'demo',
-}, {
-  text: 'Code',
-  value: 'code',
-}];
+const OPTIONS = [
+  {
+    text: "Demo",
+    value: "demo"
+  },
+  {
+    text: "Code",
+    value: "code"
+  }
+];
 
 export default class Tab extends React.Component {
   static propTypes = {
-    demo: React.PropTypes.any,
+    demo: React.PropTypes.any
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      activeKey: 'demo',
+      activeKey: "demo"
     };
   }
 
   handleSwitch(activeKey) {
     this.setState({
-      activeKey,
+      activeKey
     });
   }
 
@@ -42,7 +45,7 @@ export default class Tab extends React.Component {
     const { activeKey } = this.state;
 
     return {
-      display: key === activeKey ? 'block': 'none',
+      display: key === activeKey ? "block" : "none"
     };
   }
 
@@ -52,8 +55,8 @@ export default class Tab extends React.Component {
     const tabHeaders = OPTIONS.map(option => {
       const { text, value } = option;
       const classes = getClasses({
-        'doc-demo-head-item': true,
-        active: activeKey === value,
+        "doc-demo-head-item": true,
+        active: activeKey === value
       });
 
       return (
@@ -62,30 +65,28 @@ export default class Tab extends React.Component {
           key={`doc-demo-head-item-${value}`}
           onClick={this.handleSwitch.bind(this, value)}
         >
-        {text}
+          {text}
         </span>
       );
     });
     const demoClasses = getClasses({
-      'doc-demo-head-item': true,
-      active: activeKey === 'demo',
+      "doc-demo-head-item": true,
+      active: activeKey === "demo"
     });
     const codeClasses = getClasses({
-      'doc-demo-head-item': true,
-      active: activeKey === 'code',
+      "doc-demo-head-item": true,
+      active: activeKey === "code"
     });
-    const md = code2md(demo.codeSelf || '');
+    const md = code2md(demo.codeSelf || "");
 
     return (
       <div className="doc-demo">
-        <div className="doc-demo-head">
-          {tabHeaders}
-        </div>
-        <div className="doc-code" style={this.getStyle('code')}>
+        <div className="doc-demo-head">{tabHeaders}</div>
+        <div className="doc-code" style={this.getStyle("code")}>
           <Remarkdown md={md} />
         </div>
-        <div className="doc-true-demo" style={this.getStyle('demo')}>
-        {createElement(demo, {})}
+        <div className="doc-true-demo" style={this.getStyle("demo")}>
+          {createElement(demo, {})}
         </div>
       </div>
     );
